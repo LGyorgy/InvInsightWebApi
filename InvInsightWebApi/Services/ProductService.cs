@@ -1,4 +1,5 @@
-﻿using InvInsightWebApi.Services.Interfaces;
+﻿using InvInsightWebApi.Models;
+using InvInsightWebApi.Services.Interfaces;
 
 namespace InvInsightWebApi.Services
 {

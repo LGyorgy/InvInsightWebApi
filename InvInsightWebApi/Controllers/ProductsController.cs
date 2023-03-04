@@ -1,4 +1,5 @@
-﻿using InvInsightWebApi.Services.Interfaces;
+﻿using InvInsightWebApi.Models;
+using InvInsightWebApi.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 

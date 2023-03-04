@@ -1,4 +1,6 @@
-﻿namespace InvInsightWebApi.Services.Interfaces
+﻿using InvInsightWebApi.Models;
+
+namespace InvInsightWebApi.Services.Interfaces
 {
     public interface IProductService
     {

@@ -1,4 +1,4 @@
-﻿namespace InvInsightWebApi
+﻿namespace InvInsightWebApi.Models
 {
     public class Product
     {
