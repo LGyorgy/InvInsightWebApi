@@ -1,5 +1,7 @@
+using InvInsightWebApi.Data;
 using InvInsightWebApi.Services;
 using InvInsightWebApi.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace InvInsightWebApi
 {
@@ -7,7 +9,16 @@ namespace InvInsightWebApi
     {
         public static void Main(string[] args)
         {
+            var dataDirectoryPath = $"{AppDomain.CurrentDomain.SetupInformation.ApplicationBase}Data\\";
+            Directory.CreateDirectory(dataDirectoryPath);
+
             var builder = WebApplication.CreateBuilder(args);
+
+            var databaseFileName = builder.Configuration.GetValue<string>("DatabaseFileName");
+            var connectionString = DbInitializer.CreateConnectionString(dataDirectoryPath, databaseFileName);
+            builder.Services.AddDbContext<InventoryContext>(options =>
+                options.UseSqlite(connectionString)
+            );
 
             builder.Services.AddScoped<IProductService, ProductService>();
 
@@ -24,6 +35,13 @@ namespace InvInsightWebApi
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
+            }
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                var context = services.GetRequiredService<InventoryContext>();
+                DbInitializer.Initialize(context);
             }
 
             app.UseHttpsRedirection();
