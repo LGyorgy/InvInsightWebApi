@@ -19,9 +19,9 @@ namespace InvInsightWebApi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Product>>> Get()
         {
-            var productList = await _productService.GetAllProductsAsync();
+            var products = await _productService.GetAllProductsAsync();
 
-            return Ok(productList);
+            return Ok(products);
         }
     }
 }
