@@ -1,3 +1,6 @@
+using InvInsightWebApi.Services;
+using InvInsightWebApi.Services.Interfaces;
+
 namespace InvInsightWebApi
 {
     public class Program
@@ -6,7 +9,7 @@ namespace InvInsightWebApi
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+            builder.Services.AddScoped<IProductService, ProductService>();
 
             builder.Services.AddControllers();
             builder.Services.AddRouting(options => options.LowercaseUrls = true);
