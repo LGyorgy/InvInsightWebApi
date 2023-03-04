@@ -21,6 +21,11 @@ namespace InvInsightWebApi.Controllers
         {
             var products = await _productService.GetAllProductsAsync();
 
+            if (products is null || !products.Any())
+            {
+                return NoContent();
+            }
+
             return Ok(products);
         }
     }
