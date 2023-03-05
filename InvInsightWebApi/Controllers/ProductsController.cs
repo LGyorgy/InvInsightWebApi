@@ -17,7 +17,7 @@ namespace InvInsightWebApi.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ProductOutputDto>>> Get()
+        public async Task<ActionResult<IEnumerable<ProductOutputDto>>> GetProducts()
         {
             var products = await _productService.GetAllProductDtosAsync();
 
