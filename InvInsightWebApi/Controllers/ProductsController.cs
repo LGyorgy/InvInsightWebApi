@@ -44,9 +44,14 @@ namespace InvInsightWebApi.Controllers
             }
         }
 
-        [HttpPut]
-        public async Task<ActionResult<ProductOutputDto>> UpdateProduct([FromBody] ProductUpdateDto productUpdateDto)
+        [HttpPut("{id}")]
+        public async Task<ActionResult<ProductOutputDto>> UpdateProduct(int id, [FromBody] ProductUpdateDto productUpdateDto)
         {
+            if (productUpdateDto.Id != id)
+            {
+                return BadRequest("ID does not match route parameter.");
+            }
+
             try
             {
                 var product = await _productService.UpdateProductFromDto(productUpdateDto);
