@@ -13,11 +13,18 @@ namespace InvInsightWebApi.Services
             _inventoryContext = inventoryContext;
         }
 
-        public async Task<IEnumerable<Product>> GetAllProductsAsync()
+        public async Task<IEnumerable<ProductOutputDto>> GetAllProductDtosAsync()
         {
             var products = await _inventoryContext.Products.ToListAsync();
 
-            return products;
+            var productDtos = new List<ProductOutputDto>();
+            foreach (var product in products)
+            {
+                var productDto = new ProductOutputDto(product);
+                productDtos.Add(productDto);
+            }
+
+            return productDtos;
         }
     }
 }
