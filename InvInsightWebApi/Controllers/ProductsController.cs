@@ -43,5 +43,20 @@ namespace InvInsightWebApi.Controllers
                 return BadRequest(exception.Message);
             }
         }
+
+        [HttpPut]
+        public async Task<ActionResult<ProductOutputDto>> UpdateProduct([FromBody] ProductUpdateDto productUpdateDto)
+        {
+            try
+            {
+                var product = await _productService.UpdateProductFromDto(productUpdateDto);
+                var productOuputDto = new ProductOutputDto(product);
+                return Ok(productOuputDto);
+            }
+            catch (Exception exception)
+            {
+                return BadRequest(exception.Message);
+            }
+        }
     }
 }

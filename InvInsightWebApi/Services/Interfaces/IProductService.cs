@@ -6,5 +6,6 @@ namespace InvInsightWebApi.Services.Interfaces
     {
         Task<IEnumerable<ProductOutputDto>> GetAllProductDtosAsync();
         Task<Product> CreateProductFromDto(ProductCreateDto productInputDto);
+        Task<Product> UpdateProductFromDto(ProductUpdateDto productUpdateDto);
     }
 }

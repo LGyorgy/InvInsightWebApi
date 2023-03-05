@@ -36,5 +36,27 @@ namespace InvInsightWebApi.Services
 
             return productDtos;
         }
+
+        public async Task<Product> UpdateProductFromDto(ProductUpdateDto productUpdateDto)
+        {
+            var product = _inventoryContext.Products.FirstOrDefault(product => product.Id == productUpdateDto.Id);
+
+            if (product is null)
+            {
+                throw new ArgumentException($"Product with an ID of {productUpdateDto.Id} cannot be found.");
+            }
+
+            product.Name = productUpdateDto.Name;
+            product.Sku = productUpdateDto.Sku;
+            product.Description = productUpdateDto.Description;
+            product.Category = productUpdateDto.Category;
+            product.Price = productUpdateDto.Price;
+            product.Cost = productUpdateDto.Cost;
+            product.Supplier = productUpdateDto.Supplier;
+
+            await _inventoryContext.SaveChangesAsync();
+
+            return product;
+        }
     }
 }
