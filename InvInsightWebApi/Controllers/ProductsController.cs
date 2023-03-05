@@ -28,5 +28,19 @@ namespace InvInsightWebApi.Controllers
 
             return Ok(products);
         }
+
+        [HttpPost]
+        public async Task<ActionResult<ProductOutputDto>> CreateProduct([FromBody] ProductCreateDto productInputDto)
+        {
+            try
+            {
+                var product = await _productService.CreateProductFromDto(productInputDto);
+                return Created(nameof(CreateProduct), product);
+            }
+            catch (Exception exception)
+            {
+                return BadRequest(exception.Message);
+            }
+        }
     }
 }
