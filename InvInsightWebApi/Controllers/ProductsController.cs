@@ -58,5 +58,19 @@ namespace InvInsightWebApi.Controllers
                 return BadRequest(exception.Message);
             }
         }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<ProductOutputDto>> DeleteProduct(int id)
+        {
+            try
+            {
+                await _productService.DeleteProduct(id);
+                return NoContent();
+            }
+            catch (Exception exception)
+            {
+                return BadRequest(exception.Message);
+            }
+        }
     }
 }

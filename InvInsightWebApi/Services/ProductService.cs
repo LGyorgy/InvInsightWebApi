@@ -23,6 +23,19 @@ namespace InvInsightWebApi.Services
             return product;
         }
 
+        public async Task DeleteProduct(int id)
+        {
+            var product = _inventoryContext.Products.FirstOrDefault(product => product.Id == id);
+
+            if (product is null)
+            {
+                throw new ArgumentException($"Product with an ID of {id} cannot be found.");
+            }
+
+            _inventoryContext.Products.Remove(product);
+            await _inventoryContext.SaveChangesAsync();
+        }
+
         public async Task<IEnumerable<ProductOutputDto>> GetAllProductDtosAsync()
         {
             var products = await _inventoryContext.Products.ToListAsync();
