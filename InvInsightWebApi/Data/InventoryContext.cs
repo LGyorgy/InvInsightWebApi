@@ -10,5 +10,16 @@ namespace InvInsightWebApi.Data
         public InventoryContext(DbContextOptions<InventoryContext> options) : base(options)
         {
         }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<Product>()
+                .HasIndex(product => product.Name)
+                .IsUnique();
+
+            builder.Entity<Product>()
+                .HasIndex(product => product.Sku)
+                .IsUnique();
+        }
     }
 }
