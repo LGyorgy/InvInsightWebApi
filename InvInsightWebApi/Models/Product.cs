@@ -1,4 +1,6 @@
-﻿namespace InvInsightWebApi.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace InvInsightWebApi.Models
 {
     public class Product
     {
@@ -18,12 +20,19 @@
         }
 
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string Sku { get; set; }
-        public string Description { get; set; }
-        public string Category { get; set; }
+        [Required]
+        public string Name { get; set; } = null!;
+        [Required]
+        public string Sku { get; set; } = null!;
+        [Required]
+        public string Description { get; set; } = null!;
+        [Required]
+        public string Category { get; set; } = null!;
+        [Required]
         public double Price { get; set; }
+        [Required]
         public double Cost { get; set; }
-        public string Supplier { get; set; }
+        [Required]
+        public string Supplier { get; set; } = null!;
     }
 }
