@@ -25,7 +25,7 @@ namespace InvInsightWebApi.Services
 
         public async Task DeleteProduct(int id)
         {
-            var product = _inventoryContext.Products.FirstOrDefault(product => product.Id == id);
+            var product = await GetProductAsync(id);
 
             if (product is null)
             {
@@ -52,7 +52,7 @@ namespace InvInsightWebApi.Services
 
         public async Task<ProductOutputDto> GetProductDtoAsync(int id)
         {
-            var product = await _inventoryContext.Products.FirstOrDefaultAsync(product => product.Id == id);
+            var product = await GetProductAsync(id);
 
             if (product is null)
             {
@@ -64,7 +64,7 @@ namespace InvInsightWebApi.Services
 
         public async Task<Product> UpdateProductFromDto(ProductUpdateDto productUpdateDto)
         {
-            var product = _inventoryContext.Products.FirstOrDefault(product => product.Id == productUpdateDto.Id);
+            var product = await GetProductAsync(productUpdateDto.Id);
 
             if (product is null)
             {
@@ -80,6 +80,14 @@ namespace InvInsightWebApi.Services
             product.Supplier = productUpdateDto.Supplier;
 
             await _inventoryContext.SaveChangesAsync();
+
+            return product;
+        }
+
+        private async Task<Product?> GetProductAsync(int id)
+        {
+            var product = await _inventoryContext.Products
+                .FirstOrDefaultAsync(product => product.Id == id);
 
             return product;
         }
