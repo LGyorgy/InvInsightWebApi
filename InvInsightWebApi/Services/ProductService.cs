@@ -50,6 +50,18 @@ namespace InvInsightWebApi.Services
             return productDtos;
         }
 
+        public async Task<ProductOutputDto> GetProductDtoAsync(int id)
+        {
+            var product = await _inventoryContext.Products.FirstOrDefaultAsync(product => product.Id == id);
+
+            if (product is null)
+            {
+                return null;
+            }
+
+            return new ProductOutputDto(product);
+        }
+
         public async Task<Product> UpdateProductFromDto(ProductUpdateDto productUpdateDto)
         {
             var product = _inventoryContext.Products.FirstOrDefault(product => product.Id == productUpdateDto.Id);

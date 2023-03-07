@@ -8,5 +8,6 @@ namespace InvInsightWebApi.Services.Interfaces
         Task<Product> CreateProductFromDto(ProductCreateDto productInputDto);
         Task<Product> UpdateProductFromDto(ProductUpdateDto productUpdateDto);
         Task DeleteProduct(int id);
+        Task<ProductOutputDto> GetProductDtoAsync(int id);
     }
 }
