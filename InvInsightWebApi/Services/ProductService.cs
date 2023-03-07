@@ -50,7 +50,7 @@ namespace InvInsightWebApi.Services
             return productDtos;
         }
 
-        public async Task<ProductOutputDto> GetProductDtoAsync(int id)
+        public async Task<ProductOutputDto?> GetProductDtoAsync(int id)
         {
             var product = await GetProductAsync(id);
 
